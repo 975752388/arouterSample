@@ -1,0 +1,7 @@
+include ':login'
+include ':personal'
+include ':aroutercore'
+include ':compiler'
+include ':annotation'
+include ':app'
+rootProject.name = "ArouterSample"
