@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.util.LruCache
+import androidx.fragment.app.Fragment
 import com.key.annotation.model.Type
 import java.lang.Exception
 import java.lang.IllegalArgumentException
@@ -16,7 +17,7 @@ object Navigator {
     private val pathCache = LruCache<String, ArouterPathLoad>(100)
     private var group = ""
     private var path = ""
-    private val pathSufix = "ARouter\$\$Group\$\$"
+    private const val pathSufix = "ARouter\$\$Group\$\$"
     fun build(path:String?):BundleManager{
         checkNotNull(path){
             throw NullPointerException("path is empty")
@@ -78,7 +79,10 @@ object Navigator {
                     val fragmentClazz = routerBean?.clazz?:throw NullPointerException("fragment is null")
                     val constructor = fragmentClazz.getDeclaredConstructor()
                     constructor.isAccessible = true
-                    return constructor.newInstance()
+                    val fragment = constructor.newInstance() as Fragment
+                    return fragment.also {
+                        it.arguments = bundleManager.bundle
+                    }
                 }else{
                     //扩展
                 }

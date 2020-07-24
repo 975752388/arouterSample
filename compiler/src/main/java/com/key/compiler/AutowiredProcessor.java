@@ -1,5 +1,6 @@
 package com.key.compiler;
 
+import com.google.auto.common.BasicAnnotationProcessor;
 import com.google.auto.service.AutoService;
 import com.key.annotation.Autowired;
 import com.key.compiler.constants.Constants;
@@ -49,6 +50,7 @@ public class AutowiredProcessor extends AbstractProcessor {
         messager = processingEnv.getMessager();
         typeUtils = processingEnv.getTypeUtils();
         messager.printMessage(Diagnostic.Kind.NOTE,"AutowiredProcessor init");
+
     }
 
     @Override
